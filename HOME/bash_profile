@@ -48,32 +48,32 @@ luna-stat() {
     dstat -Tcdnmly --noheaders --output xxx.dstat
 }
 
-url_sftp() {
-    # get sftp URL point to some file or dir
-    echo "sftp://"`hostname --fqdn`$1
-}
+alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias mem='vim -c "set ft=conf" ~/mem'
 
 #----
 # git
 #----
-# User data
-git config --global user.name "Gregory Komissarov"
-git config --global user.email gkomissarov@yandex-team.ru
-#git config --global core.editor /usr/bin/vim
-
-# Colors
-git config --global color.diff auto
-git config --global color.status auto
-git config --global color.branch auto
- 
-# Aliases
-git config --global alias.co checkout
-git config --global alias.ci commit
-git config --global alias.up "remote update"
-git config --global alias.st status
-
-# Excludes
-git config --global core.excludesfile ~/.gitignore
+if [ `which git` ]; then
+    # User data
+    git config --global user.name "Gregory Komissarov"
+    git config --global user.email gregory.komissarov@gmail.com 
+    #git config --global core.editor /usr/bin/vim
+    
+    # Colors
+    git config --global color.diff auto
+    git config --global color.status auto
+    git config --global color.branch auto
+     
+    # Aliases
+    git config --global alias.co checkout
+    git config --global alias.ci commit
+    git config --global alias.up "remote update"
+    git config --global alias.st status
+    
+    # Excludes
+    git config --global core.excludesfile ~/.gitignore
+fi
 
 #-----------------
 # OS specific part
@@ -90,8 +90,9 @@ then
     alias ls='gls --color'
     alias echo='gecho'
     alias ldd='otool -L'
+    export ARCHFLAGS="-arch i386 -arch x86_64"
     git config --global core.editor /usr/bin/vim
-    export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin":/opt/local/bin:/opt/local/sbin:$PATH
+    #export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin":/opt/local/bin:/opt/local/sbin:$PATH
 
 elif [ $UNAME == "FreeBSD" ]
 then
@@ -119,11 +120,9 @@ if [ $WRAP_PATH ]; then
     source $WRAP_PATH
 fi
 
-#----------------
-# Check home size
-#----------------
-HOME_SIZE=`du -h --max-depth=0 ~ | awk -F"M" '{print $1}'`
-if [ $HOME_SIZE -gt 1024 ]; then
-    echo "HOME FOLDER GROWN UP:"
-    du -h --max-depth=0 ~
+#-------
+# Screen
+#-------
+if [ $SHLVL == 1 ]; then
+    screen -R -q
 fi
