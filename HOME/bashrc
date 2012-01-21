@@ -1,0 +1,129 @@
+#-------
+# editor
+#-------
+export EDITOR='vim'
+export SVN_EDITOR='vim --noplugin'
+
+#---------------------
+# colorize grep output
+#---------------------
+alias grep='grep --color=auto'
+export GREP_COLOR='1;33'
+
+#--------
+# HISTORY
+#--------
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+export HISTCONTROL="ignoredups"
+export HISTIGNORE="&:ls:[bf]g:exit"
+
+#---------------
+# TERMINAL TITLE
+#---------------
+HOSTNAME_SHORT=`hostname -s`
+PROMPT_COMMAND='echo -ne "\033]0;$HOSTNAME_SHORT\007"'
+
+#-----------------
+# AUTOCOMPLETE SSH
+#-----------------
+_compssh ()
+{
+cur=${COMP_WORDS[COMP_CWORD]};
+COMPREPLY=($(compgen -W '$(cat ~/.ssh/hosts_list | grep -v "^#")' -- $cur))
+}
+complete -F _compssh ssh
+
+#----------
+# functions
+#----------
+#git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+wanip() {
+    # return ip addr that Internet severs will associate with as. 
+    wget -q -O - checkip.dyndns.com/ | awk '{print $6}'| sed 's/<.*>//'
+}
+
+luna-stat() {
+    # collect perf data in lunapark complitable format
+    dstat -Tcdnmly --noheaders --output xxx.dstat
+}
+
+url_sftp() {
+    # get sftp URL point to some file or dir
+    echo "sftp://"`hostname --fqdn`$1
+}
+
+#----
+# git
+#----
+# User data
+git config --global user.name "Gregory Komissarov"
+git config --global user.email gkomissarov@yandex-team.ru
+#git config --global core.editor /usr/bin/vim
+
+# Colors
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+ 
+# Aliases
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.up "remote update"
+git config --global alias.st status
+
+# Excludes
+git config --global core.excludesfile ~/.gitignore
+
+#-----------------
+# OS specific part
+#-----------------
+UNAME=`uname`
+if [ $UNAME == "Linux" ]
+then
+    # Linux
+    alias ls="ls --color"
+
+elif [ $UNAME == "Darwin" ]
+then
+    # Mac OS
+    alias ls='gls --color'
+    alias echo='gecho'
+    alias ldd='otool -L'
+    git config --global core.editor /usr/bin/vim
+    export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin":/opt/local/bin:/opt/local/sbin:$PATH
+
+elif [ $UNAME == "FreeBSD" ]
+then
+    # FreeBSD
+    alias ls='ls -G'
+
+elif [ $UNAME == "SunOS" ]
+then
+    # SunOS
+    alias ls='/usr/local/bin/ls --color=auto'
+    alias grep='ggrep --colour'
+    alias tar='gtar'
+fi
+
+#-------
+# Python
+#-------
+WRAP_PATH=`which virtualenvwrapper.sh`
+if [ $WRAP_PATH ]; then
+    # We have wrapper script in PATH, let's use it.
+    if [ ! -d ~/.virtualenvs ]; then
+        mkdir ~/.virtualenvs
+    fi
+    export WORKON_HOME=~/.virtualenvs
+    source $WRAP_PATH
+fi
+
+#----------------
+# Check home size
+#----------------
+HOME_SIZE=`du -h --max-depth=0 ~ | awk -F"M" '{print $1}'`
+if [ $HOME_SIZE -gt 1024 ]; then
+    echo "HOME FOLDER GROWN UP:"
+    du -h --max-depth=0 ~
+fi
