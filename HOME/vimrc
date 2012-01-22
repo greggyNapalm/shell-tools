@@ -68,13 +68,10 @@ endif
 "----------
 " Табы(окна) в vim
 "----------
-map tn :tabnext<CR>
-nmap <S-tab> :tabprev<cr>
-"nmap <S-tab> :tabprevious<cr>
-"imap <S-tab> <ESC>:tabprevious<cr>i
-nmap <C-r> :tabnew<cr>
-imap <C-r> <ESC>:tabnew<cr>
-
+nmap <S-Left>   :tabprev<CR>
+nmap <S-Right>  :tabnext<CR>
+nmap <F3>       :tabm<CR>
+nmap <F4>       :tabnew<CR>
 "----------
 " Folding
 "----------
@@ -113,7 +110,7 @@ Bundle 'kevinw/pyflakes-vim'
 " python syntax check
 Bundle 'nvie/vim-pep8'
 " Most Recently Used
-Bundle 'vim-scripts/mru.vim.git'
+"Bundle 'vim-scripts/mru.vim.git'
 "NERDtree
 Bundle 'scrooloose/nerdtree.git'
 nnoremap <F1> :NERDTree<CR>
