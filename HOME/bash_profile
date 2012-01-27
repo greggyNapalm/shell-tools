@@ -124,5 +124,12 @@ fi
 # Screen
 #-------
 if [ $SHLVL == 1 ]; then
-    screen -R -q
+    FIRST_DETACHED=`screen -ls | grep -m1 "Detached" | awk '{print $1}'`
+    
+    if [ $FIRST_DETACHED ]
+    then
+        screen -r $FIRST_DETACHED
+    else
+        screen -R -q
+    fi
 fi
