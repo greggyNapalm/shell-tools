@@ -51,6 +51,7 @@ luna-stat() {
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias mem='vim -c "set ft=conf" ~/mem'
 alias vimrc='vim ~/.vimrc'
+source ~/.shell_functions.sh
 #----
 # git
 #----
