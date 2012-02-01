@@ -50,7 +50,7 @@ luna-stat() {
 
 alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias mem='vim -c "set ft=conf" ~/mem'
-
+alias vimrc='vim ~/.vimrc'
 #----
 # git
 #----
@@ -75,6 +75,8 @@ then
     export ARCHFLAGS="-arch i386 -arch x86_64"
     git config --global core.editor /usr/bin/vim
     #export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin":/opt/local/bin:/opt/local/sbin:$PATH
+    # Disable the “Are you sure you want to open this application?” dialog
+    defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 elif [ $UNAME == "FreeBSD" ]
 then
