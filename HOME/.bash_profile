@@ -1,3 +1,15 @@
+#--------
+# aliases
+#--------
+alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+alias mem='vim -c "set ft=conf" ~/mem'
+alias vimrc='vim ~/.vimrc'
+
+#----------
+# functions
+#----------
+source ~/.shell_functions.sh
+
 #-------
 # editor
 #-------
@@ -34,24 +46,6 @@ COMPREPLY=($(compgen -W '$(cat ~/.ssh/hosts_list | grep -v "^#")' -- $cur))
 }
 complete -F _compssh ssh
 
-#----------
-# functions
-#----------
-##git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-#wanip() {
-#    # return ip addr that Internet severs will associate with as. 
-#    wget -q -O - checkip.dyndns.com/ | awk '{print $6}'| sed 's/<.*>//'
-#}
-#
-#luna-stat() {
-#    # collect perf data in lunapark complitable format
-#    dstat -Tcdnmly --noheaders --output xxx.dstat
-#}
-#
-alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-alias mem='vim -c "set ft=conf" ~/mem'
-alias vimrc='vim ~/.vimrc'
-source ~/.shell_functions.sh
 #----
 # git
 #----
