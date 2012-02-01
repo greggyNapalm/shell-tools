@@ -54,26 +54,8 @@ alias mem='vim -c "set ft=conf" ~/mem'
 #----
 # git
 #----
-if [ `which git` ]; then
-    # User data
-    git config --global user.name "Gregory Komissarov"
-    git config --global user.email gregory.komissarov@gmail.com 
-    #git config --global core.editor /usr/bin/vim
-    
-    # Colors
-    git config --global color.diff auto
-    git config --global color.status auto
-    git config --global color.branch auto
-     
-    # Aliases
-    git config --global alias.co checkout
-    git config --global alias.ci commit
-    git config --global alias.up "remote update"
-    git config --global alias.st status
-    
-    # Excludes
-    git config --global core.excludesfile ~/.gitignore
-fi
+# Excludes
+git config --global core.excludesfile ~/.gitignore
 
 #-----------------
 # OS specific part
