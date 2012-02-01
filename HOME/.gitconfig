@@ -1,0 +1,15 @@
+[user]
+	name = Gregory Komissarov
+	email = gregory.komissarov@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	co = checkout
+	ci = commit
+	up = remote update
+	st = status
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /etc/.gitignore
