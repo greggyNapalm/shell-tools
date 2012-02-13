@@ -73,6 +73,7 @@ then
     # Mac OS
     alias ls='gls --color'
     alias echo='gecho'
+    alias date='gdate'
     alias ldd='otool -L'
     export ARCHFLAGS="-arch i386 -arch x86_64"
     git config --global core.editor /usr/bin/vim
