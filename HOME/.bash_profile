@@ -5,6 +5,11 @@ alias sshu="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias mem='vim -c "set ft=conf" ~/mem'
 alias vimrc='vim ~/.vimrc'
 
+alias ipython='/usr/bin/env python $(which ipython)'
+alias clean-py="find . -type f -name '*.py[co]' -delete"
+alias clean-swp="find . -type f -name '*.swp' -delete"
+alias f="find . -name"
+
 #----------
 # functions
 #----------
@@ -49,8 +54,10 @@ complete -F _compssh ssh
 #----
 # git
 #----
-# Excludes
-git config --global core.excludesfile ~/.gitignore
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM=auto
 
 #-----------------
 # OS specific part
@@ -70,7 +77,7 @@ then
     export ARCHFLAGS="-arch i386 -arch x86_64"
     git config --global core.editor /usr/bin/vim
     #export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin":/opt/local/bin:/opt/local/sbin:$PATH
-    # Disable the “Are you sure you want to open this application?” dialog
+    export MANPATH="/opt/local/share/man:${MANPATH}"
     defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 elif [ $UNAME == "FreeBSD" ]

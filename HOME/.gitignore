@@ -1,5 +1,7 @@
 *.pyc
-*.swp
+*.pyo
+.*.swp
+tags
 .idea*
 .google_appengine
 .DS_Store
