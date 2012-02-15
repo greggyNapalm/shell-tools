@@ -8,14 +8,28 @@
     call vundle#rc()
 
 " plugins
+
+    "Bundle 'klen/python-mode'
+    Bundle 'python.vim'
+    Bundle 'python_match.vim'
+    Bundle 'pythoncomplete'
+
+
+    "Bundle 'Shougo/neocomplcache'
+
+    "Bundle 'spf13/vim-colors'
+    "Bundle 'flazz/vim-colorschemes'
+    "Bundle 'tpope/vim-surround'
+
     " common
-    Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+    "Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+    Bundle 'git://github.com/ervandew/supertab.git'
     Bundle 'scrooloose/nerdtree.git'
     Bundle 'git://github.com/vim-scripts/Tagbar.git'
     Bundle 'git://github.com/mattn/zencoding-vim.git'
 
     " Python
-    Bundle 'kevinw/pyflakes-vim'
+    "Bundle 'kevinw/pyflakes-vim'
     Bundle 'nvie/vim-pep8'
 
     " markup
@@ -30,6 +44,47 @@
  
 
 filetype plugin indent on           " required!
+
+"---------
+" omnifunc
+"---------
+    "autocmd FileType python set omnifunc=pythoncomplete#Complete
+    "autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    "autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    "
+    "" also fix the godforsaken pink OmniComplete colors
+    "func! s:FixPmenu()
+    "  hi PmenuSel ctermbg=black
+    "  hi Pmenu ctermbg=darkgrey
+    "endf
+    "command! FixPmenu call s:FixPmenu()
+    "cabbr fpmnu FixPmenu
+    "
+    "augroup fixPmenuFfs
+    "  au!
+    "  autocmd BufReadPost * FixPmenu
+    "augroup end
+    
+
+    " OmniComplete {
+        let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+        if has("autocmd") && exists("+omnifunc")
+            autocmd Filetype *
+                \if &omnifunc == "" |
+                \setlocal omnifunc=syntaxcomplete#Complete |
+                \endif
+        endif
+
+        highlight Pmenu  ctermbg=7 ctermfg=8 cterm=bold term=bold
+        "cterm=none ctermbg=3 ctermfg=8
+
+        " automatically open and close the popup menu / preview window
+        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        "set completeopt=menu,preview,longest
+        set completeopt=menu,longest
+        let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+    " }
 
 " plugins config
     nnoremap <F1> :NERDTree<CR>
@@ -74,12 +129,23 @@ set t_Co=256            " Кол-во цветов
 set so=999  " Keep cursor matches in the middle of the window.
  
 
-map <C-Up> <C-W>j
-map <C-Down> <C-W>k
+map <C-Up> <C-W>k
+map <C-Down> <C-W>j
 map <C-Right> <C-W>l
 map <C-Left> <C-W>h
 
 nnoremap <Esc><Esc> qall
+
+"set cursorline
+"hi CursorLine ctermbg=147 cterm=NONE
+
+
+"set background=dark
+"color solarized                 " load a colorscheme
+"        let g:solarized_termtrans=1
+"        let g:solarized_termcolors=256
+"        let g:solarized_contrast="high"
+"        let g:solarized_visibility="high"
 
 
 " new new
