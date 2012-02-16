@@ -18,8 +18,7 @@ DAEMON="httpbin"
 DAEMON_BASE="httpbin"
 DAEMON_HOME="/usr/local/httpbin"
 PID_NAME="/var/run/httpbin/run.pid"
-#CONFIG_NAME="/home/gkomissarov/app/stargazer-control/etc/stargazer-control.yaml"
-#SOCK_FILE="/var/run/yandex-load-stargazer-control/twisted_json.sock"
+#SOCK_FILE="/var/run/blabla"
 
 #----------
 # functions
@@ -74,7 +73,7 @@ case "$1" in
     start-stop-daemon --quiet --retry 10 --stop --pidfile $PID_NAME
     log_end_msg $?
     rm -f /var/run/$DAEMON_BASE/$DAEMON.pid 2>/dev/null
-    rm -f /var/run/yandex-load-stargazer-control/twisted_json.sock 2>/dev/null
+    #rm -f /var/run/blabla/twisted_json.sock 2>/dev/null
   ;;
 
   restart)
