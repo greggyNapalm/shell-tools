@@ -72,7 +72,7 @@ case "$1" in
     log_begin_msg "Stopping $DAEMON..."
     start-stop-daemon --quiet --retry 10 --stop --pidfile $PID_NAME
     log_end_msg $?
-    rm -f /var/run/$DAEMON_BASE/$DAEMON.pid 2>/dev/null
+    rm -f $PID_NAME 2>/dev/null
     #rm -f /var/run/blabla/twisted_json.sock 2>/dev/null
   ;;
 
