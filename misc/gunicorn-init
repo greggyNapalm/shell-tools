@@ -54,17 +54,18 @@ case "$1" in
       log_failure_msg "$DAEMON already running"
     else
     	log_begin_msg "Starting $DAEMON..."
-      	uf=$DAEMON_HOME"deploy/ulimit.conf"
+      	uf=$DAEMON_HOME"/deploy/ulimit.conf"
       	if [ -x $uf ]; then
         	log_action_msg "Loading ulimits from file" $uf
         	. $uf
       	fi
+
         # virtualenv enabling
         source $DAEMON_HOME"/deploy/httpbin_venv/bin/activate"
 
         # start WSGI daemon 
-	      cd $DAEMON_HOME"/httpbin"
-	      gunicorn --bind=0.0.0.0:18080 --pid=$PID_NAME --workers 2 --keep-alive=65 --user=httpbin --daemon httpbin:app 
+	    cd $DAEMON_HOME"/httpbin"
+	    gunicorn --bind=0.0.0.0:18080 --pid=$PID_NAME --workers 2 --keep-alive=65 --user=httpbin --daemon httpbin:app 
     fi
   ;;
 
