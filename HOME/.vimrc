@@ -8,7 +8,7 @@
     
     " plugins
         " common
-        "Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+        Bundle 'git://github.com/altercation/vim-colors-solarized.git'
         Bundle 'git://github.com/ervandew/supertab.git'
         Bundle 'scrooloose/nerdtree.git'
         Bundle 'git://github.com/vim-scripts/Tagbar.git'
@@ -94,12 +94,13 @@
         "hi CursorLine ctermbg=147 cterm=NONE
 
     " theme
-    "set background=dark
-    "color solarized                 " load a colorscheme
-    "        let g:solarized_termtrans=1
-    "        let g:solarized_termcolors=256
-    "        let g:solarized_contrast="high"
-    "        let g:solarized_visibility="high"
+    set background=dark
+    color solarized                 " load a colorscheme
+            let g:solarized_termtrans=1
+            let g:solarized_termcolors=256
+            let g:solarized_contrast="high"
+            let g:solarized_visibility="high"
+    syntax enable
 
 
 
@@ -198,6 +199,11 @@ set ruler		" show the cursor position all the time
     set pastetoggle=<F2>
     set showmode
 
-"----
+nmap [1;2D :tabprev<CR>
+nmap [1;2C :tabnext<CR>
+
+autocmd FileType sh set softtabstop=2 
+autocmd FileType sh set shiftwidth=2
+autocmd FileType sh set tabstop=2 
 " EOF
 "----
