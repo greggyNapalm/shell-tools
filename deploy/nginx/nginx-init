@@ -1,0 +1,103 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          nginx
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the nginx web server
+# Description:       starts nginx using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/nginx/sbin
+DAEMON_HOME="/opt/nginx"
+#DAEMON=/usr/local/nginx/sbin/nginx
+NAME=nginx
+DESC=nginx
+
+DAEMON_BIN=$DAEMON_HOME"/sbin/nginx"
+PID_FILE=$DAEMON_HOME"/logs/nginx.pid"
+
+# Include nginx defaults if available
+if [ -f /usr/local/etc/default/nginx ]; then
+	. /usr/local/etc/default/nginx
+fi
+
+test -x $DAEMON || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+test_nginx_config() {
+	if $DAEMON_BIN -t $DAEMON_OPTS >/dev/null 2>&1; then
+		return 0
+	else
+		$DAEMON_BIN -t $DAEMON_OPTS
+		return $?
+	fi
+}
+
+case "$1" in
+	start)
+		echo -n "Starting $DESC: "
+		test_nginx_config
+		# Check if the ULIMIT is set in /etc/default/nginx
+		if [ -n "$ULIMIT" ]; then
+			# Set the ulimits
+			ulimit $ULIMIT
+		fi
+    # load rvm for passenger module
+    source "/usr/local/lib/rvm"
+
+		start-stop-daemon --start --quiet --pidfile $PID_FILE \
+		    --exec $DAEMON_BIN -- $DAEMON_OPTS || true
+		echo "$NAME."
+		;;
+
+	stop)
+		echo -n "Stopping $DESC: "
+		start-stop-daemon --stop --quiet --pidfile $PID_FILE \
+		    --exec $DAEMON_BIN || true
+		echo "$NAME."
+		;;
+
+	restart|force-reload)
+		echo -n "Restarting $DESC: "
+		start-stop-daemon --stop --quiet --pidfile \
+		    $PID_FILE --exec $DAEMON_BIN || true
+		sleep 1
+		test_nginx_config
+		start-stop-daemon --start --quiet --pidfile \
+		    $PID_FILE --exec $DAEMON_BIN -- $DAEMON_OPTS || true
+		echo "$NAME."
+		;;
+
+	reload)
+		echo -n "Reloading $DESC configuration: "
+		test_nginx_config
+		start-stop-daemon --stop --signal HUP --quiet --pidfile $PID_FILE \
+		    --exec $DAEMON_BIN || true
+		echo "$NAME."
+		;;
+
+	configtest|testconfig)
+		echo -n "Testing $DESC configuration: "
+		if test_nginx_config; then
+			echo "$NAME."
+		else
+			exit $?
+		fi
+		;;
+
+	status)
+		status_of_proc -p $PID_FILE "$DAEMON_BIN" nginx && exit 0 || exit $?
+		;;
+	*)
+		echo "Usage: $NAME {start|stop|restart|reload|force-reload|status|configtest}" >&2
+		exit 1
+		;;
+esac
+
+exit 0
