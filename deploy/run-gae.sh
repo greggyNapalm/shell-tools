@@ -1,13 +1,16 @@
 #!/bin/bash
 
+#----------
+# arguments 
+#----------
 args=''
 
 # db
-args=$args'--datastore_path=/Users/gkomissarov/Downloads/db'
+args=$args'--datastore_path=~/docs/vcs/lqe-tool-backend/db/morpheus_ext'
 
 # Network
 #args=$args' --port=80'
-#args=$args' --address=0.0.0.0'
+args=$args' --address=0.0.0.0'
 
 # Update
 args=$args'  --skip_sdk_update_check'
@@ -21,24 +24,53 @@ if [ "$1" = "email" ]; then
     args=$args' --smtp_password='$2
 fi
 
-# common info
-UNAME=`uname`
-if [ $UNAME == "Darwin" ]
+#----------
+# functions
+#----------
+colorize_out () {
+    while read line
+    do
+        case "$line" in 
+            INFO*)
+                color="$(tput setaf 6)"
+            ;;
+
+            WARNING*)
+                color="$(tput setaf 3)"
+            ;;
+
+            ERROR*)
+                color="$(tput setaf 1)"
+            ;;
+        esac
+
+        echo "$color"$line"$(tput sgr0)"
+    done
+}
+
+#-----
+# main
+#-----
+if [ `uname` == "Darwin" ]
 then
-    GAE_VER=`cat /Applications/GoogleAppEngineLauncher.app/Contents/Info.plist | grep -m1 "Google Inc" | awk '{print $2}'`
+    GAE_ver=`cat /Applications/GoogleAppEngineLauncher.app/Contents/Info.plist | grep -m1 "Google Inc" | awk '{print $2}'`
 fi
 
-BRANCH=`git branch | head -1`
-PY_VER=`python -c "import platform; print platform.python_version()"`
+branch=`git branch | head -1`
+py_ver=`python -c "import platform; print platform.python_version()"`
 
 clear
 printf "%15s: %s\n%15s: %s\n%15s: %s\n%15s: %s\n"\
-    "python" "$PY_VER"\
-    "GAE" "${GAE_VER%?}"\
-    "branch" "$BRANCH"\
+    "python" "$py_ver"\
+    "GAE" "${GAE_ver%?}"\
+    "branch" "$branch"\
     "passing args" "$args"
 
 for((i=1;i<=80;i++));do printf "%s" "+";done;printf "\n"
 
 # launch it
-dev_appserver.py $args .
+dev_appserver.py $args . 2>&1 | colorize_out
+
+#----
+# END 
+#----
