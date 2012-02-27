@@ -30,16 +30,23 @@ export GREP_COLOR='1;33'
 #--------
 # HISTORY
 #--------
+hopt -s histappend
+shopt -s cmdhist
+export HISTSIZE=1000000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoredups:erasedups
+export HISTTIMEFORMAT='%F %T '
+
 shopt -s histappend
-PROMPT_COMMAND='history -a'
-export HISTCONTROL="ignoredups"
-export HISTIGNORE="&:ls:[bf]g:exit"
+shopt -s cmdhist
+
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 #---------------
 # TERMINAL TITLE
 #---------------
 HOSTNAME_SHORT=`hostname -s`
-PROMPT_COMMAND='echo -ne "\033]0;$HOSTNAME_SHORT\007"'
+export PROMPT_COMMAND="echo -ne \"\033]0;$HOSTNAME_SHORT\007\"; $PROMPT_COMMAND"
 
 #-----------------
 # AUTOCOMPLETE SSH

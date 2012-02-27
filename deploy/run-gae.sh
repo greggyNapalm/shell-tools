@@ -6,11 +6,12 @@
 args=''
 
 # db
-args=$args'--datastore_path=~/docs/vcs/lqe-tool-backend/db/morpheus_ext'
+#args=$args'--datastore_path=~/docs/vcs/lqe-tool-backend/db/morpheus_ext'
+args=$args'--datastore_path=~/docs/vcs/lqe-tool-backend/db/morpheus_current'
 
 # Network
 #args=$args' --port=80'
-args=$args' --address=0.0.0.0'
+#args=$args' --address=0.0.0.0'
 
 # Update
 args=$args'  --skip_sdk_update_check'
