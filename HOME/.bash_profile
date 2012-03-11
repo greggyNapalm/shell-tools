@@ -30,7 +30,6 @@ export GREP_COLOR='1;33'
 #--------
 # HISTORY
 #--------
-hopt -s histappend
 shopt -s cmdhist
 export HISTSIZE=1000000
 export HISTFILESIZE=100000
@@ -99,6 +98,13 @@ then
     alias ls='/usr/local/bin/ls --color=auto'
     alias grep='ggrep --colour'
     alias tar='gtar'
+fi
+
+#------
+# local
+#------
+if [ -e "$HOME/.bash_locale" ]; then
+    . "$HOME/.bash_locale"
 fi
 
 #-------
