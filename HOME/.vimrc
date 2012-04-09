@@ -205,5 +205,6 @@ nmap [1;2C :tabnext<CR>
 autocmd FileType sh set softtabstop=2 
 autocmd FileType sh set shiftwidth=2
 autocmd FileType sh set tabstop=2 
+"---- 
 " EOF
 "----
