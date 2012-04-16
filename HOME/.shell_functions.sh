@@ -23,6 +23,7 @@ shell_update() {
     done
     
     cp -pR .[!.]* ~/
+    ln -s ~/.vim/bundle/solarized/colors/solarized.vim ~/.vim/colors/
     
     cd ~
     rm -Rf "/tmp/"$TMP_DIR
