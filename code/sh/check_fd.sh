@@ -44,7 +44,7 @@ while [ 1 ]; do
     declare -A result
     sum=0
     
-    listing=`ls -l /proc/$pid/fd/ | awk '{print $10}'`
+    listing=`ls -l /proc/$pid/fd/ 2>/dev/null | awk '{print $10}'`
     epoch=`date +%s.%N`
     out_line="epoch:${epoch}${FD}"
     
