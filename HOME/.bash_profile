@@ -123,13 +123,18 @@ fi
 #-------
 # Screen
 #-------
-if [ $SHLVL == 1 ]; then
-    FIRST_DETACHED=`screen -ls | grep -m1 "Detached" | awk '{print $1}'`
-    
-    if [ $FIRST_DETACHED ]
-    then
-        screen -r $FIRST_DETACHED
-    else
-        screen -R -q
-    fi
-fi
+#if [ $SHLVL == 1 ]; then
+#    FIRST_DETACHED=`screen -ls | grep -m1 "Detached" | awk '{print $1}'`
+#    
+#    if [ $FIRST_DETACHED ]
+#    then
+#        screen -r $FIRST_DETACHED
+#    else
+#        screen -R -q
+#    fi
+#fi
+
+#-----
+# tmux 
+#-----
+tmux new-session -t bash || tmux new-session -s bash
