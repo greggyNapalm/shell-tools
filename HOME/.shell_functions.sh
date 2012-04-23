@@ -23,13 +23,19 @@ shell_update() {
     done
     
     cp -pR .[!.]* ~/
-    ln -s ~/.vim/bundle/solarized/colors/solarized.vim ~/.vim/colors/
     
     cd ~
     rm -Rf "/tmp/"$TMP_DIR
 
     # download/update vim bundles from github
     git --version && vim +BundleInstall +qall || echo 'You need to have git client to update vim bundles'
+
+    if [ ! -f ~/.vim/colors/solarized.vim ]
+    then
+        if [ -f ~/.vim/bundle/solarized/colors/solarized.vim ]
+            ln -s ~/.vim/bundle/solarized/colors/solarized.vim ~/.vim/colors/
+        fi
+    fi
 }
 wanip() {
     # return ip addr that Internet severs will associate with as. 
