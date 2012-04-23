@@ -33,6 +33,7 @@ shell_update() {
     if [ ! -f ~/.vim/colors/solarized.vim ]
     then
         if [ -f ~/.vim/bundle/solarized/colors/solarized.vim ]
+        then
             ln -s ~/.vim/bundle/solarized/colors/solarized.vim ~/.vim/colors/
         fi
     fi
