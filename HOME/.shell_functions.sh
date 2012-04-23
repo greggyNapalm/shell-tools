@@ -27,6 +27,9 @@ shell_update() {
     
     cd ~
     rm -Rf "/tmp/"$TMP_DIR
+
+    # download/update vim bundles from github
+    git --version && vim +BundleInstall +qall || echo 'You need to have git client to update vim bundles'
 }
 wanip() {
     # return ip addr that Internet severs will associate with as. 
