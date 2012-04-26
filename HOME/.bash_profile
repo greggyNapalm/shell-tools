@@ -137,4 +137,4 @@ fi
 #-----
 # tmux 
 #-----
-tmux new-session -t bash || tmux new-session -s bash
+TERM=screen-256color-bce tmux -2 new-session -t bash || TERM=screen-256color-bce tmux -2 new-session -s bash
