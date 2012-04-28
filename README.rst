@@ -12,3 +12,8 @@ The latest **stable version** of shell-tools can always be installed (or updated
     # never run script from internet  without reading them first
     source /tmp/$now
     shell_update
+
+Ubuntu 8 LTS::
+
+    git clone git://github.com/altercation/vim-colors-solarized.git
+    mv vim-colors-solarized .vim/bundle/
