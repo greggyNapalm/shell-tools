@@ -138,5 +138,6 @@ fi
 # tmux 
 #-----
 export TERM=xterm-256color
-tmux attach-session -t bash || tmux new-session bash
+tmux a || tmux new-session bash
+#tmux attach-session -t bash || tmux new-session bash
 #TERM=screen-256color-bce tmux -2 new-session -t bash || TERM=screen-256color-bce tmux -2 new-session -s bash
