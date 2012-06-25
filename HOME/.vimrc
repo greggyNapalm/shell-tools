@@ -10,7 +10,7 @@
         " common
         Bundle 'git://github.com/altercation/vim-colors-solarized.git'
         Bundle 'git://github.com/ervandew/supertab.git'
-        Bundle 'scrooloose/nerdtree.git'
+        Bundle 'git://github.com/scrooloose/nerdtree.git'
         Bundle 'git://github.com/vim-scripts/Tagbar.git'
         Bundle 'git://github.com/mattn/zencoding-vim.git'
     
