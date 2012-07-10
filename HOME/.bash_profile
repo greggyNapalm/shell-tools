@@ -9,6 +9,7 @@ alias ipython='/usr/bin/env python $(which ipython)'
 alias clean-py="find . -type f -name '*.py[co]' -delete"
 alias clean-swp="find . -type f -name '*.swp' -delete"
 alias f="find . -name"
+alias tm="tmux a || tmux new-session bash"
 
 #----------
 # functions
@@ -73,6 +74,9 @@ if [ $UNAME == "Linux" ]
 then
     # Linux
     alias ls="ls --color"
+    export LC_ALL="en_US.utf8"
+    export LANG="en_US"
+    export LANGUAGE="en_US.utf8"
 
 elif [ $UNAME == "Darwin" ]
 then
@@ -138,6 +142,6 @@ fi
 # tmux 
 #-----
 export TERM=xterm-256color
-tmux a || tmux new-session bash
+#tmux a || tmux new-session bash
 #tmux attach-session -t bash || tmux new-session bash
 #TERM=screen-256color-bce tmux -2 new-session -t bash || TERM=screen-256color-bce tmux -2 new-session -s bash
