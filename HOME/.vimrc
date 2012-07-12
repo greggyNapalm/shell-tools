@@ -15,6 +15,7 @@
         Bundle 'git://github.com/mattn/zencoding-vim.git'
     
         " Python
+        Bundle 'git://github.com/nvie/vim-flake8.git'
         "Bundle 'kevinw/pyflakes-vim'
         "Bundle 'python.vim'
         "Bundle 'python_match.vim'
