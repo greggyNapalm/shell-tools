@@ -16,13 +16,11 @@
     
         " Python
         Bundle 'git://github.com/nvie/vim-flake8.git'
+        "Bundle 'nvie/vim-pep8'
         "Bundle 'kevinw/pyflakes-vim'
         "Bundle 'python.vim'
         "Bundle 'python_match.vim'
         "Bundle 'pythoncomplete'
-    
-    
-        Bundle 'nvie/vim-pep8'
     
         " markup
         Bundle 'git://github.com/othree/html5.vim.git'
@@ -30,6 +28,7 @@
         Bundle 'git://github.com/skammer/vim-css-color.git'
     
         " client-side scripts
+        Bundle 'git://github.com/walm/jshint.vim.git'
         Bundle 'git://github.com/pangloss/vim-javascript.git'
         Bundle 'git://github.com/itspriddle/vim-jquery.git'
         Bundle 'git://github.com/kchmck/vim-coffee-script.git'
@@ -40,6 +39,9 @@
 "---------------
 " plugins config
 "---------------
+"    "JSHint
+        map <F8> :JSHint<CR>
+
     " NERDTree
         nnoremap <F1> :NERDTree<CR>
         let NERDTreeIgnore = ['\.pyc$', '\.swp$']

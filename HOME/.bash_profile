@@ -10,6 +10,8 @@ alias clean-py="find . -type f -name '*.py[co]' -delete"
 alias clean-swp="find . -type f -name '*.swp' -delete"
 alias f="find . -name"
 alias tm="tmux a || tmux new-session bash"
+alias py27="export PATH=/opt/python/2.7.3/bin:$PATH &&\
+                source /opt/python/2.7.3/bin/virtualenvwrapper.sh; python -V"
 
 #----------
 # functions
@@ -27,6 +29,7 @@ export SVN_EDITOR='vim --noplugin'
 #---------------------
 alias grep='grep --color=auto'
 export GREP_COLOR='1;33'
+export PAGER=less
 
 #--------
 # HISTORY
