@@ -12,6 +12,7 @@ alias f="find . -name"
 alias tm="tmux a || tmux new-session bash"
 alias py27="export PATH=/opt/python/2.7.3/bin:$PATH &&\
                 source /opt/python/2.7.3/bin/virtualenvwrapper.sh; python -V"
+alias gdiff='git diff -U10 | dwdiff --diff-input -c | less -R'
 
 #----------
 # functions
