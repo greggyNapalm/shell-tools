@@ -10,28 +10,32 @@
         " common
         Bundle 'git://github.com/altercation/vim-colors-solarized.git'
         Bundle 'git://github.com/ervandew/supertab.git'
-        Bundle 'git://github.com/scrooloose/nerdtree.git'
+        Bundle 'scrooloose/nerdtree.git'
         Bundle 'git://github.com/vim-scripts/Tagbar.git'
         Bundle 'git://github.com/mattn/zencoding-vim.git'
+        Bundle 'git://github.com/scrooloose/syntastic.git'
     
         " Python
         Bundle 'git://github.com/nvie/vim-flake8.git'
-        "Bundle 'nvie/vim-pep8'
         "Bundle 'kevinw/pyflakes-vim'
         "Bundle 'python.vim'
         "Bundle 'python_match.vim'
         "Bundle 'pythoncomplete'
+        "Bundle 'nvie/vim-pep8'
+
+        " JS
+        Bundle 'git://github.com/walm/jshint.vim.git'
     
         " markup
         Bundle 'git://github.com/othree/html5.vim.git'
         Bundle 'git://github.com/hail2u/vim-css3-syntax.git'
         Bundle 'git://github.com/skammer/vim-css-color.git'
+        Bundle 'git://github.com/Glench/Vim-Jinja2-Syntax.git'
     
         " client-side scripts
-        Bundle 'git://github.com/walm/jshint.vim.git'
         Bundle 'git://github.com/pangloss/vim-javascript.git'
         Bundle 'git://github.com/itspriddle/vim-jquery.git'
-        Bundle 'git://github.com/kchmck/vim-coffee-script.git'
+        "Bundle 'git://github.com/kchmck/vim-coffee-script.git'
      
     
     filetype plugin indent on           " required!
@@ -39,7 +43,11 @@
 "---------------
 " plugins config
 "---------------
-"    "JSHint
+    " Syntastic
+    let g:syntastic_mode_map = { 'mode': 'passive',
+                               \ 'active_filetypes': [],
+                               \ 'passive_filetypes': ['js'] }
+    "JSHint
         map <F8> :JSHint<CR>
 
     " NERDTree
@@ -74,7 +82,12 @@
 "---------
 " text
 "---------
-    set textwidth=80
+    au FileType python set textwidth=80
+    au FileType javascript set textwidth=80
+    au FileType javascript set shiftwidth=4
+    au FileType html set textwidth=999
+    au FileType html set shiftwidth=2
+    "set textwidth=80
     set formatoptions-=o    " dont continue comments when pushing o/O
     set linebreak           " Перенос не разрывая слов
 
@@ -97,13 +110,12 @@
         "hi CursorLine ctermbg=147 cterm=NONE
 
     " theme
-    set background=dark
-    color solarized                 " load a colorscheme
-            let g:solarized_termtrans=1
-            let g:solarized_termcolors=256
-            let g:solarized_contrast="high"
-            let g:solarized_visibility="high"
-    syntax enable
+    "set background=dark
+    "color solarized                 " load a colorscheme
+    "        let g:solarized_termtrans=1
+    "        let g:solarized_termcolors=256
+    "        let g:solarized_contrast="high"
+    "        let g:solarized_visibility="high"
 
 
 
@@ -137,9 +149,6 @@
     map <C-Right> <C-W>l
     map <C-Left> <C-W>h
     
-    nnoremap <Esc><Esc> qall
-
-
 " new new
 "------------------------------------------------------------------------------
 set nocompatible	" Use Vim defaults (much better!)
@@ -201,13 +210,16 @@ set ruler		" show the cursor position all the time
     nnoremap <F2> :set invpaste paste?<CR>
     set pastetoggle=<F2>
     set showmode
+    set background=dark
 
-nmap [1;2D :tabprev<CR>
-nmap [1;2C :tabnext<CR>
+    set background=dark
+    color solarized                 " load a colorscheme
+            let g:solarized_termtrans=1
+            let g:solarized_termcolors=256
+            let g:solarized_contrast="high"
+            let g:solarized_visibility="high"
 
-autocmd FileType sh set softtabstop=2 
-autocmd FileType sh set shiftwidth=2
-autocmd FileType sh set tabstop=2 
-"---- 
+    syntax enable
+"----
 " EOF
 "----
