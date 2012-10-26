@@ -16,3 +16,21 @@
 	excludesfile = /etc/.gitignore
 [merge]
     tool = vimdiff
+[user]
+	name = Gregory Komissarov
+	email = gregory.komissarov@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	co = checkout
+	ci = commit
+	up = remote update
+	st = status
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[core]
+	editor = /usr/bin/vim
+	excludesfile = /etc/.gitignore
+[merge]
+    tool = vimdiff

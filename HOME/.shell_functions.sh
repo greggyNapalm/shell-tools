@@ -47,6 +47,33 @@ luna-stat() {
     # collect perf data in lunapark complitable format
     dstat -Tcdnmly --noheaders --output xxx.dstat
 }
+
+py-new() {
+UNIQ_DATE=`date +%s_%N`
+FNAME=$UNIQ_DATE".py"
+
+cat > $FNAME << EOF
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+app.module
+~~~~~~~~~~~~~~~
+
+Some info about this module.
+"""
+import os
+
+def main():
+    print 'Done'
+
+if __name__ == '__main__':
+    main()
+EOF
+
+chmod +x $FNAME
+echo 'Python source file: '"$FNAME"
+}
 #----
 # end 
 #----
