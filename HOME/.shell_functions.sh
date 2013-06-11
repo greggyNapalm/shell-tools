@@ -48,6 +48,23 @@ luna-stat() {
     dstat -Tcdnmly --noheaders --output xxx.dstat
 }
 
+tm() {
+    SLOT=`tmux ls | fgrep -v '(attached)' | head -1 | awk -F':' '{print $1}'`
+    if [ $SLOT ]
+    then
+        #echo "attach to ${SLOT}"
+        tmux attach -d -t $SLOT
+    else
+        #echo 'New session'
+        tmux new-session bash
+    fi
+}
+
+h() {
+    # quick history search
+    history | grep $1
+}
+
 py-new() {
 UNIQ_DATE=`date +%s_%N`
 FNAME=$UNIQ_DATE".py"

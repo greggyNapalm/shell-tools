@@ -9,7 +9,7 @@ alias ipython='/usr/bin/env python $(which ipython)'
 alias clean-py="find . -type f -name '*.py[co]' -delete"
 alias clean-swp="find . -type f -name '*.swp' -delete"
 alias f="find . -name"
-alias tm="tmux a || tmux new-session bash"
+#alias tm="tmux a || tmux new-session bash"
 alias py27="export PATH=/opt/python/2.7.3/bin:$PATH &&\
                 source /opt/python/2.7.3/bin/virtualenvwrapper.sh; python -V"
 alias gdiff='git diff -U10 | dwdiff --diff-input -c | less -R'
