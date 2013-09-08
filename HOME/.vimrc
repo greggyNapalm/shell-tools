@@ -27,10 +27,11 @@
         Bundle 'git://github.com/walm/jshint.vim.git'
     
         " markup
-        Bundle 'git://github.com/othree/html5.vim.git'
-        Bundle 'git://github.com/hail2u/vim-css3-syntax.git'
-        Bundle 'git://github.com/skammer/vim-css-color.git'
-        Bundle 'git://github.com/Glench/Vim-Jinja2-Syntax.git'
+        Bundle 'git://github.com/gregsexton/MatchTag.git'
+        "Bundle 'git://github.com/othree/html5.vim.git'
+        "Bundle 'git://github.com/hail2u/vim-css3-syntax.git'
+        "Bundle 'git://github.com/skammer/vim-css-color.git'
+        "Bundle 'git://github.com/Glench/Vim-Jinja2-Syntax.git'
     
         " client-side scripts
         Bundle 'git://github.com/pangloss/vim-javascript.git'
