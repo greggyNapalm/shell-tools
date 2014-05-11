@@ -10,14 +10,20 @@
 import os
 import logging
 import graypy
+import datetime
 
-my_logger = logging.getLogger('test_logger')
-my_logger.setLevel(logging.DEBUG)
+logger = logging.getLogger('test_logger')
+logger.setLevel(logging.DEBUG)
 
-handler = graypy.GELFHandler('gelf.graylog.host', 12201)
-my_logger.addHandler(handler)
+handler = graypy.GELFHandler('127.0.0.1', 12201)
+logger.addHandler(handler)
 
-my_logger.debug('Hello Graylog2.')
+#logger.debug('Hello Graylog2. py-src UDP')
+adapter = logging.LoggerAdapter(logger, {
+    'job': 'test_gelf_udp',
+    'worker_version': '0.1.2',
+})
+adapter.info('Hello Graylog2. With additional fields. {}'.format(datetime.datetime.now()))
 
 def main():
     print 'Done'
