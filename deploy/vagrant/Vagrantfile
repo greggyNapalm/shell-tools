@@ -1,0 +1,58 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+RAND_NAME_SUFFIX = Socket.gethostname
+# Auto select interface
+pref_interface = ['en2: USB Ethernet', 'en0: Wi-Fi (AirPort)']
+vm_interfaces = %x( VBoxManage list bridgedifs | grep ^Name ).gsub(/Name:\s+/, '').split("\n")
+pref_interface = pref_interface.map {|n| n if vm_interfaces.include?(n)}.compact
+$network_interface = pref_interface[0]
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+#config.vm.network :hostonly, :dhcp
+#config.vm.network :public_network, :bridge => $network_interface
+#config.vm.network :hostonly, "10.11.12.13", :netmask => "255.255.0.0"
+config.vm.provider "virtualbox" do |v|
+   v.memory = 2048
+end  
+
+  config.vm.define 'centos6-vm' do |machine|
+    machine.vm.box = "centos6-vm"
+	machine.vm.box_url = '~/docs/vm/vbox/centos65.box', "http://www.lyricalsoftware.com/downloads/centos65.box"
+	machine.vm.hostname = "centos6-vm-#{RAND_NAME_SUFFIX}"
+    #machine.vm.network "private_network", ip: "10.99.23.253"
+    #machine.vm.network "public_network"
+  end
+
+  config.ssh.forward_agent = true
+  
+#  $provisioningscript = <<PROVISIONINGSCRIPTEOF
+#	echo I am provisioning...
+#	YUM_CMD=$(which yum 2>/dev/null) 
+#    APT_GET_CMD=$(which apt-get 2>/dev/null) 
+#    if [[ ! -z $YUM_CMD ]]; then
+#     # assume its RedHat
+#	 yum -y install ansible avahi nss-mdns
+#	 # want to have all packages up2date - uncomment this:
+#	 #yum -y upgrade
+#	 chkconfig --add avahi-daemon
+#     chkconfig --add messagebus
+#     service messagebus start
+#	 service avahi-daemon start
+#    elif [[ ! -z $APT_GET_CMD ]]; then
+#     # assum its Debian
+#	 export DEBIAN_FRONTEND=noninteractive
+#     apt-get -y install ansible virtualbox-guest-dkms virtualbox-guest-utils avahi-daemon sshpass
+#    else
+#     echo "error can't install package $PACKAGE"
+#    exit 1;
+#    fi
+#	date > /etc/vagrant_provisioned_at
+#	ansible-playbook --inventory /vagrant/provisioning/ansible/inventory/vagrant /vagrant/provisioning/ansible/basic-provision.yml --connection=local --limit $(echo ${HOSTNAME}|cut -d - -f 1,2)
+#	echo ----------------------------------------
+#	echo $(hostname).local ready for use 
+#	echo ----------------------------------------
+#PROVISIONINGSCRIPTEOF
+#  config.vm.provision "shell", inline: $provisioningscript
+end

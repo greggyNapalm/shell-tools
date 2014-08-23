@@ -15,7 +15,7 @@ import datetime
 logger = logging.getLogger('test_logger')
 logger.setLevel(logging.DEBUG)
 
-handler = graypy.GELFHandler('127.0.0.1', 12201)
+handler = graypy.GELFHandler('lunaport-log.haze.yandex.net', 12201)
 logger.addHandler(handler)
 
 #logger.debug('Hello Graylog2. py-src UDP')
