@@ -1,0 +1,16 @@
+- hosts: centos6vm
+  gather_facts: False 
+  sudo: True
+  #port: 2222
+  #user: gkomissarov
+  vars:
+  #  # created with:
+  #  # python -c "from passlib.hash import sha512_crypt; print sha512_crypt.encrypt('<password>')"
+    password: '$6$rounds=100000$.Q.T1yYZwwV61C8f$5q.CfAI/j/cj1tHmz3jAKUmT6ZxS3gH9Q5ucTpm0/kTBPyRAvBA9pATnbNQ/8m8.CFI9eSYhJiT6jz9ymagwK.'
+
+  #include_vars: './variable.yml'
+  vars_files:
+    - './variable.yml'
+
+  tasks:
+    - action: user name={{name}} password={{password}}
