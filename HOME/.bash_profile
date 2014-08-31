@@ -1,3 +1,10 @@
+#------------------------------
+# Default aliases and functions
+#------------------------------
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
 #--------
 # aliases
 #--------
@@ -85,6 +92,11 @@ then
 elif [ $UNAME == "Darwin" ]
 then
     # Mac OS
+    export LC_ALL="en_US.UTF-8"
+    export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/opt/gradle/bin:$PATH
+    source /opt/local/etc/bash_completion
+    export DISPLAY=:0.0
+    alias readlink='greadlink'
     alias ls='gls --color'
     alias echo='gecho'
     alias date='gdate'

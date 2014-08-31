@@ -1,16 +1,105 @@
+# vim: set ts=2 sw=2 sts=2 et
 - hosts: centos6vm
   gather_facts: False 
   sudo: True
-  #port: 2222
-  #user: gkomissarov
   vars:
-  #  # created with:
-  #  # python -c "from passlib.hash import sha512_crypt; print sha512_crypt.encrypt('<password>')"
-    password: '$6$rounds=100000$.Q.T1yYZwwV61C8f$5q.CfAI/j/cj1tHmz3jAKUmT6ZxS3gH9Q5ucTpm0/kTBPyRAvBA9pATnbNQ/8m8.CFI9eSYhJiT6jz9ymagwK.'
+    paswd: 'so close'
 
-  #include_vars: './variable.yml'
   vars_files:
-    - './variable.yml'
+    - 'variable.yml'
 
   tasks:
-    - action: user name={{name}} password={{password}}
+
+#
+#
+    - name: copy Centos repo files
+      run_once: true
+      action: copy src=files/repo/centos.repo dest=/etc/yum.repos.d/jenkins.repo
+
+    - name: Install the libselinux-python package
+      yum: name=libselinux-python state=installed
+
+#    - name: install nginx rpm from a local file
+#      yum: name=/tmp/policycoreutils-python-2.0.83-19.39.el6.x86_64.rpm state=present
+
+    - name: disbale selinux
+      selinux: state=disabled
+
+    - name: create or modify enabled user groups
+      group: name={{ item }} state=present
+      with_items: all_groups 
+
+    - name: create or modify enabled user
+      user: >
+       name={{ item.name }}
+       uid={{ item.uid }}
+       shell={{ item.shell|default('/bin/bash') }}
+       createhome=yes
+       home={{ item.homedirectory }}
+       comment="{{ item.gecos|default('User created by ansible') }}"
+       groups="{{ item.groups }}"
+      with_items: users_accounts
+    
+    - name: add ssh keys for authorized users
+      authorized_key: user={{ item.0.name }} key="{{ item.1 }}"
+      with_subelements:
+         - users_accounts
+         - authorized_keys
+
+    - name: Downloading and enable the EPEL repository definitions.
+      run_once: true
+      action: command rpm -Uvh --replacepkgs http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+    - name: Downloading and enable the PosgreSQL repo
+      run_once: true
+      action: command rpm -Uvh --replacepkgs http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+
+    - name: Downloading and enable the Jenkins repository definitions.
+      run_once: true
+      action: command rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+#rpm --import http://passenger.stealthymonkeys.com/RPM-GPG-KEY-stealthymonkeys.asc      
+
+    - name: copy Nginx repo files
+      run_once: true
+      action: copy src=files/repo/nginx.repo dest=/etc/yum.repos.d/nginx.repo
+
+    - name: copy Jenkins repo files
+      run_once: true
+      action: copy src=files/repo/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo
+
+
+
+#    - name: Enabling extras repo
+#      run_once: true
+#      action: command yum -y install centos-release-SCL 
+
+    - name: install my packages
+      yum: pkg={{ item }} state=installed
+
+#      when: ansible_distribution == 'CentOS' and ansible_distribution_version == '6.5'
+#      when: ansible_os_family == 'RedHat' and ansible_lsb.major_release|int == 6
+      with_items:
+         - iotop 
+         - yum-plugin-ps 
+         - iptraf 
+         - man 
+         - bind-utils 
+         - vim-enhanced 
+         - nc 
+         - zip 
+         - unzip 
+         - wget 
+         - curl 
+         - tmux 
+         - yum-utils 
+         - lsof 
+         - bash-completion 
+         - dstat 
+         - mc 
+         - mtr 
+         - ntp 
+         - openssh-server 
+         - pbzip2 
+         - sysstat 
+         - lzop 
+         - atop 

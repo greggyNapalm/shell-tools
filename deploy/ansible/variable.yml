@@ -1,37 +1,40 @@
+#vim :set ts=4 sw=4 sts=4 et :
 developers_groups:
- - developres
- - ninjas
+ - 'developres'
+ - 'ninjas'
 
 ops_groups:
- - ops
- - wheel
+ - 'ops'
+ - 'wheel'
 
 robots_groups:
- - robots 
+ - 'robots'
+ - 'terminators'
 
 company_groups:
- - company 
+ - 'company'
+ - 'company555'
 
-common_users_accounts:
+all_groups: "{{developers_groups + ops_groups + robots_groups + company_groups}}"
+
+users_accounts:
  - name: 'gkomissarov'
-   uid: 2000
-   sudo_line: 'ALL=NOPASSWD: ALL'
-   gecos: 'Gregory Komissarov'
-   homedirectory: /home/gkomissarov
-   email: gregory.komissarov@novardis.com
+   uid: 4000
+   gecos: "Gregory Komissarov"
+   homedirectory: '/home/gkomissarov'
+   email: 'gregory.komissarov@novardis.com'
    shell: '/bin/bash'
-   groups: "{{ company_groups + ops_groups }}"
-   password: '$6$rounds=100000$.Q.T1yYZwwV61C8f$5q.CfAI/j/cj1tHmz3jAKUmT6ZxS3gH9Q5ucTpm0/kTBPyRAvBA9pATnbNQ/8m8.CFI9eSYhJiT6jz9ymagwK.'
+   groups: "{{ ','.join(company_groups + ops_groups) }}"
    authorized_keys: [
-   'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC83X7+kZOvDVeivbLSj2a9J16gytVVCmWTAiMbtPkyRn05UnVZdNhAr4LNsihMrARQaQ1OPXTQWgAb0PCSB/C8qk6/kyIg5kwJq3HinaPk0A0L1SYbbz7L3mfnZlcIbDnNgaHB1JpQ0dMWlaThHS7OQ1+e09GN1PkdVuPcW2DgO0h6D93I34ae9J1C0nDi50CP9M5QzDlaRO6AsVgqODn63F84HFIWXXhs9EDK8Z8ZlD2Jc5VslVIJ9l5v4Lydy1anFu1vdveDhimuHk9rBNk7ax7Lfk0IQ9J1g+/7UMyM737Y/3m+l79NZUWD21Wodakm8Ell5jgQCGSLly5gKtRp gkomissarov@valhalla'
+   'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzamDL0Vv2T0Oq/wXyuPBmoWWOOycAKF+cD0x+4dU4LPxxj9fDjOCHgkncrv3vHUGtevChL45g0la4Ex0hpiTrhW42+eRCP37fm4Ykh9F3dvN9C8PjD2MHc/BpXR1hCMI2L+rqLLeJIZ4Q99SVw6yud23HjL35c/JfSEgfeqx+mCcwnSCDdCYSNsZqNU/fCB7IE4mmyKVRUxMTYFMXCZuTS0mV3eIbsu4Hw+lsyCYyYdbqv9fOAOTSJMPRz1mJrjMtWXkhyWVwohd7JoWFJN2zHLoPm//7F/zW3hU7GwgguSs5/afGqyfJsrID2zoEpOqX7K02/YwACk29CJL4n5WR gkomissarov@valhalla'
    ]
- - name: robot
-   uid: 30001
+ - name: 'robot'
+   uid: 2001
    disabled: False
-   gecos: 'VCS robot'
-   #sudo_line: 'ALL=NOPASSWD: ALL'
-   email: robot@company.com
-   groups: "{{ company_groups + robots }}"
+   gecos: "VCS\ robot"
+   homedirectory: "/home/robot"
+   email: 'robot@company.com'
+   groups: "{{ ','.join(company_groups + robots_groups) }}"
    authorized_keys: [
    'ssh-rsa XXX'
    ]

@@ -6,3 +6,4 @@ $ ansible all -i inventory.yml -u vagrant --private-key=~/.vagrant.d/insecure_pr
 
 https://confluence.atlassian.com/display/JIRA/Installing+JIRA+on+Linux
 https://confluence.atlassian.com/display/DOC/Confluence+Installation+Guide
+https://confluence.atlassian.com/display/DOC/Performance+Tuning
