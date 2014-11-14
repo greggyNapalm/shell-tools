@@ -140,24 +140,8 @@ if [ $WRAP_PATH ]; then
     source $WRAP_PATH
 fi
 
-#-------
-# Screen
-#-------
-#if [ $SHLVL == 1 ]; then
-#    FIRST_DETACHED=`screen -ls | grep -m1 "Detached" | awk '{print $1}'`
-#    
-#    if [ $FIRST_DETACHED ]
-#    then
-#        screen -r $FIRST_DETACHED
-#    else
-#        screen -R -q
-#    fi
-#fi
-
 #-----
 # tmux 
 #-----
+export PS1='\H:\W \u\$ '
 export TERM=xterm-256color
-#tmux a || tmux new-session bash
-#tmux attach-session -t bash || tmux new-session bash
-#TERM=screen-256color-bce tmux -2 new-session -t bash || TERM=screen-256color-bce tmux -2 new-session -s bash
