@@ -103,3 +103,9 @@
          - sysstat 
          - lzop 
          - atop 
+         - cyrus-sasl-plain 
+         - strace
+         - mailx
+         - tcpdump
+         - nmap
+         - git
